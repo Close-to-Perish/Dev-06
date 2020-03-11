@@ -1,34 +1,58 @@
-$(document).ready(function(){
-  console.log('in doc ready f/n')
+
+console.log("Waiting for user input");
+
+var form = document.getElementById("myForm");
+function handleForm(event) {
+  event.preventDefault();
+  } 
+form.addEventListener('submit', handleForm);
+
+var el = document.getElementById("submit");
+el.addEventListener("click", inOutFunction);
+
+function inOutFunction() {
+  var userName = document.getElementById("name").value;
+  console.log("Got User input");
+
+  document.getElementById("userGreeting").innerHTML = "Greetings, "+userName+"!";
+  console.log("Printed user greeting");
+
+  var oneDay = 1000 * 60 * 60 * 24;
+
+  var presentDate = new Date();
+  var christmasDay = new Date(presentDate.getFullYear(), 11, 25);
+
+  if (presentDate.getMonth() == 11 && presentDate.getdate() > 25){
+    christmasDay.setFullYear(christmasDay.getFullYear() + 1);
+  }
+
+  var result = Math.round(christmasDay.getTime() - presentDate.getTime()) / (oneDay);
+  var daysToChristmas = result.toFixed(0);
+
+  console.log("Calculated Days till Christmas");
+
+  document.getElementById("daysTillChristmas").innerHTML = "There are "+daysToChristmas+" days till Christmas.";
+  console.log("Printed days till chrsitmas");
+
+  var nameLen = userName.length;
+
+  document.getElementById("nameLength").innerHTML = "Your name is "+nameLen+" letters long.";
+  console.log("Printed length of name.");
+
+  var randomNames = ["Stanley", "Jim", "Micheal", "Pam", "Johnny", "Bernie"]
+
+  var randNum = Math.floor(Math.random() * 5);
+
+  var randomUserName = randomNames[randNum];
+
+  document.getElementById("randomName").innerHTML = "Your new random name is "+randomUserName+".";
+  console.log("Printed random new name.");
+
+  var nameSum = userName.length + 26;
   
- 
-   
-  //var el = document.getElementById("card-spot");
-  //console.log(el); 
-  //el.appendChild(bsCardTemplate); 
+  console.log("Calculated name length plus # of letters in alphabet.");
   
-  //code to create a bs card
-  //code to add contents to card
-  
-  var elBtn = document.getElementsByTagName("button"); 
-  console.log(elBtn[0]);
-  elBtn[0].onclick = function(){
-     createBSCard(getCardInput()); 
- };
-  
-}); 
-//code to get input contents
-function getCardInput() {
-  var elInput = document.getElementById("card-input");
-  return elInput.value;
-}
-function createBSCard(cardText) {
-  
-  var bsCardTemplate= document.createElement("div");
-  bsCardTemplate.innerHTML = '<div class="card col-md-4"><div class="card-body">  <h5 class="card-title">Card title</h5><h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>  <p class="card-text">'+cardText+'</p>  </div> </div>';  
-  
-  document.body.appendChild(bsCardTemplate);    
-  //TODO: later append to the card-spot, first on page
-  
+  document.getElementById("addName").innerHTML = "The sum of your name length and the # of letters in the alphabet is: "+nameSum+".";
+  console.log("Printed sum.");
   
 }
